@@ -1,0 +1,19 @@
+{
+  "name": "unusefulbot",
+  "version": "1.0.0",
+  "description": "An under development bot project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "UnusefulCoder",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/builders": "^0.11.0",
+    "discord.js": "^13.5.1",
+    "dotenv": "^10.0.0",
+    "fs": "^0.0.1-security",
+    "glob": "^7.2.0",
+    "util": "^0.12.4"
+  }
+}
