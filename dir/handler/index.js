@@ -10,7 +10,7 @@ const globPromise = promisify(glob);
  */
 module.exports = async (client) => {
     
-    // Prefix Komutları
+    // Chat Commands
     const commandFiles = await globPromise(`${process.cwd()}/dir/commands/**/*.js`);
     commandFiles.map((value) => {
         const file = require(value);
@@ -23,11 +23,11 @@ module.exports = async (client) => {
         }
     });
 
-    // Eventler
+    // Events
     const eventFiles = await globPromise(`${process.cwd()}/dir/events/*.js`);
     eventFiles.map((value) => require(value));
 
-    // Slash Komutları
+    // Slash Commands
     const slashCommands = await globPromise(
         `${process.cwd()}/dir/SlashCommands/*/*.js`
     );
@@ -45,7 +45,7 @@ module.exports = async (client) => {
         arrayOfSlashCommands.push(file);
     });
     client.on("ready", async () => {
-        // Tek bir server için kullanma (debug/test)
+        // Register for a guild only
         const guild = client.guilds.cache
         .get("921887368162717746")
         await guild.commands.set(arrayOfSlashCommands).then((cmd) => {
@@ -83,7 +83,7 @@ module.exports = async (client) => {
             guild.commands.permissions.set({ fullPermissions });
         });
 
-        // Tüm serverlarda kullanma
+        // Register Globally
         // Yetki scriptleri InteractionCreate.js'de!
         //await client.application.commands.set(arrayOfSlashCommands);
     });
