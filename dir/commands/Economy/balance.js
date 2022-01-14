@@ -1,4 +1,4 @@
-const { Message, Client } = require("discord.js");
+const { Message, Client, MessageEmbed } = require("discord.js");
 const economy = require("discord-bot-eco");
 
 module.exports = {
@@ -17,17 +17,31 @@ module.exports = {
       const walletbalance = await economy.get(userid, "wallet");
       const bankbalance = await economy.get(userid, "bank");
 
-      message.reply(
-        `Their wallet balance is ${walletbalance}. \nTheir bank balance is ${bankbalance}.`
-      );
+      // Embeds start
+      const replyembed = new MessageEmbed()
+        .setColor("RANDOM")
+        .setTitle("Balance")
+        .setDescription(
+          `Their wallet balance is ${walletbalance}. \nTheir bank balance is ${bankbalance}.`
+        )
+        .setTimestamp();
+      // Embeds end
+
+      message.reply({ embeds: [replyembed] });
     } catch (err) {
       const authorid = message.author.id;
       const walletbalance2 = await economy.get(authorid, "wallet");
       const bankbalance2 = await economy.get(authorid, "bank");
+      // Embeds start
+      const AuthorEmbed = new MessageEmbed()
+        .setColor("RANDOM")
+        .setTitle("Balance")
+        .setDescription(
+          `Your wallet balance is ${walletbalance2}. \nYour bank balance is ${bankbalance2}.`
+        )
+        .setTimestamp();
 
-      message.reply(
-        `Your wallet balance is ${walletbalance2}. \nYour bank balance is ${bankbalance2}.`
-      );
+      message.reply({ embeds: [AuthorEmbed] });
     }
   },
 };
