@@ -1,11 +1,9 @@
-const discord = require('discord.js')
+const discord = require("discord.js");
 require("dotenv").config();
 const { Client, Collection } = require("discord.js");
 
-
-
 const client = new Client({
-    intents: 32767,
+  intents: 32767,
 });
 
 module.exports = client;
