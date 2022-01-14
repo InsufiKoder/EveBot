@@ -28,23 +28,27 @@ module.exports = {
     const target = interaction.options.getMember("member");
     const reason =
       interaction.options.getString("reason") || "No reason provided";
+    try {
+      if (
+        target.roles.highest.position >=
+        interaction.member.roles.highest.position
+      )
+        return interaction.followUp({
+          content:
+            "You can't kick this user because their role is higher/equal to yours.",
+        });
 
-    if (
-      target.roles.highest.position >= interaction.member.roles.highest.position
-    )
-      return interaction.followUp({
-        content:
-          "You can't kick this user because their role is higher/equal to yours.",
+      await target.send(
+        `You have been kicked from ${interaction.guild.name}, reason: ${reason}`
+      );
+
+      target.kick(reason);
+
+      interaction.followUp({
+        content: `Kicked ${target.user.tag} successfully. reason: ${reason}`,
       });
-
-    await target.send(
-      `You have been kicked from ${interaction.guild.name}, reason: ${reason}`
-    );
-
-    target.kick(reason);
-
-    interaction.followUp({
-      content: `Kicked ${target.user.tag} successfully. reason: ${reason}`,
-    });
+    } catch (err) {
+      interaction.followUp({ content: "An error occured. Please try again." });
+    }
   },
 };

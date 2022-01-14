@@ -20,17 +20,21 @@ module.exports = {
   run: async (client, interaction) => {
     const userId = interaction.options.getString("userid");
 
-    interaction.guild.members
-      .unban(userId)
-      .then((user) => {
-        interaction.followUp({
-          content: `${user.tag} is unbanned successfully.`,
+    try {
+      interaction.guild.members
+        .unban(userId)
+        .then((user) => {
+          interaction.followUp({
+            content: `${user.tag} is unbanned successfully.`,
+          });
+        })
+        .catch(() => {
+          interaction.followUp({
+            content: "Please specify a banned member's valid id.",
+          });
         });
-      })
-      .catch(() => {
-        interaction.followUp({
-          content: "Please specify a banned member's valid id.",
-        });
-      });
+    } catch (err) {
+      interaction.followUp("An error occured. Please try again.");
+    }
   },
 };

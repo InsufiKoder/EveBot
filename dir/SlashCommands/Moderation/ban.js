@@ -1,4 +1,4 @@
-const { CommandInteraction } = require("discord.js");
+const { CommandInteraction, MessageEmbed } = require("discord.js");
 //TODO: Delete current output and add embeds
 module.exports = {
   name: "ban",
@@ -29,22 +29,53 @@ module.exports = {
     const reason =
       interaction.options.getString("reason") || "No reason provided";
 
-    if (
-      target.roles.highest.position >= interaction.member.roles.highest.position
-    )
-      return interaction.followUp({
-        content:
-          "You can't ban this user because their role is higher/equal to yours.",
+    // Embeds start
+    const error = new MessageEmbed()
+      .setColor("RANDOM")
+      .setTitle("An error occured")
+      .setDescription("An error occured. Please try again.")
+      .setTimestamp();
+    const banned = new MessageEmbed()
+      .setColor("RANDOM")
+      .setTitle("Success!")
+      .setDescription(
+        `Banned ${target.user.tag} successfully. reason: ${reason}`
+      )
+      .setTimestamp();
+    const targetsend = new MessageEmbed()
+      .setColor("RANDOM")
+      .setTitle("You are banned")
+      .setDescription(
+        `You have been banned from ${interaction.guild.name}, reason: ${reason}`
+      )
+      .setTimestamp();
+    const equalembed = new MessageEmbed()
+      .setColor("RANDOM")
+      .setTitle("Equal/Higher role")
+      .setDescription(
+        "You can't ban this user because their role is higher/equal to yours."
+      )
+      .setTimestamp();
+    // Embeds end
+
+    try {
+      if (
+        target.roles.highest.position >=
+        interaction.member.roles.highest.position
+      )
+        return interaction.followUp({
+          embeds: [equalembed],
+        });
+
+      await target.send({ embeds: [targetsend] });
+
+      target.ban({ reason });
+
+      interaction.followUp({
+        embeds: [banned],
       });
-
-    await target.send(
-      `You have been banned from ${interaction.guild.name}, reason: ${reason}`
-    );
-
-    target.ban({ reason });
-
-    interaction.followUp({
-      content: `Banned ${target.user.tag} successfully. reason: ${reason}`,
-    });
+    } catch (err) {
+      interaction.followUp({ embeds: [error] });
+    }
   },
 };
