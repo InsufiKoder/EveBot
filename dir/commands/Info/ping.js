@@ -1,8 +1,7 @@
-const { Message, Client } = require("discord.js");
+const { Message, Client, MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "ping",
-  description: "pong!",
   aliases: ["p"],
   /**
    *
@@ -11,6 +10,12 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
-    message.channel.send(`${client.ws.ping} ws ping`);
+    const replyembed = new MessageEmbed()
+      .setColor("RANDOM")
+      .setTitle("Ping")
+      .setDescription(`${client.ws.ping}ms!`)
+      .setTimestamp();
+
+    message.channel.send({ embeds: [replyembed] });
   },
 };
