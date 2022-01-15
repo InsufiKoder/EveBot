@@ -1,4 +1,4 @@
-const { Message, Client } = require("discord.js");
+const { Message, Client, MessageEmbed } = require("discord.js");
 const economy = require("discord-bot-eco");
 const cooldown = new Set();
 
@@ -14,15 +14,22 @@ module.exports = {
    **/
   run: async (client, message, args) => {
     const userid = message.author.id;
+    // Embeds start
+    const replyembed = new MessageEmbed()
+      .setColor("RANDOM")
+      .setTitle("Cooldown")
+      .setDescription(
+        "You should wait 5 seconds before using this command again."
+      )
+      .setTimestamp();
+    // Embeds end
 
     setTimeout(() => {
       cooldown.delete(message.author.id);
     }, 5000);
 
     if (cooldown.has(message.author.id)) {
-      message.reply(
-        "You should wait 5 seconds before using this command again."
-      );
+      message.reply({ embeds: [replyembed] });
     } else {
       economy.work(userid, 25, 250);
 

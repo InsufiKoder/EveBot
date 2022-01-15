@@ -1,4 +1,4 @@
-const { Message, Client } = require("discord.js");
+const { Message, Client, MessageEmbed } = require("discord.js");
 const economy = require("discord-bot-eco");
 
 module.exports = {
@@ -16,10 +16,26 @@ module.exports = {
       const userid = message.author.id;
       const convert = parseInt(args);
 
+      // Embeds start
+      const replyembed = new MessageEmbed()
+        .setColor("RANDOM")
+        .setTitle("Success!")
+        .setDescription(`Deposited ${convert}!`)
+        .setTimestamp();
+      // Embeds end
+
       await economy.deposit(userid, convert);
-      message.reply(`Deposited ${convert}!`);
+      message.reply({ embeds: [replyembed] });
     } catch (err) {
-      message.reply("Please insert an amount greater than 0.");
+      // Embeds start
+      const errorembed = new MessageEmbed()
+        .setColor("RANDOM")
+        .setTitle("Error")
+        .setDescription("Please insert an amount greater than 0.")
+        .setTimestamp();
+      // Embeds end
+
+      message.reply({ embeds: [errorembed] });
     }
   },
 };
