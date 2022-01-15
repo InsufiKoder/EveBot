@@ -37,11 +37,11 @@ module.exports = {
     }, 86400000);
 
     if (cooldown.has(message.author.id)) {
-      message.reply({ embeds: cooldownembed });
+      message.reply({ embeds: [cooldownembed] });
     } else {
       await economy.daily(userid, amount);
 
-      message.reply({ embeds: replyembed });
+      message.reply({ embeds: [replyembed] });
       cooldown.add(message.author.id);
     }
   },
