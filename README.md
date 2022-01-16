@@ -2,7 +2,7 @@
 EveBot is a multi-purpose discord bot that is currently in development. This bot supports chat commands, slash commands and context menu.
 
 # Try it!
-You can try the bot using [this link.](https://discord.com/api/oauth2/authorize?client_id=931264433177636874&permissions=32767&scope=bot%20applications.commands)
+You can try the bot using [this link.](https://discord.com/api/oauth2/authorize?client_id=931264433177636874&permissions=32767&scope=bot%20applications.commands) Keep in mind it's more likely to be offline though.
 
 # To run the bot
 1. Install all dependencies with "npm i".
