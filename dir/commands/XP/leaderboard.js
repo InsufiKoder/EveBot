@@ -2,8 +2,9 @@ const { Message, Client, MessageEmbed } = require("discord.js");
 const xp = require("simply-xp");
 
 module.exports = {
-  name: "leaderboard",
+  name: "xpleaderboard",
   description: "Shows the xp leaderboard.",
+  aliases: ["xplb"],
   /**
    *
    * @param {Client} client

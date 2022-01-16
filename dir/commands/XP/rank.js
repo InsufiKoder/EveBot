@@ -4,6 +4,7 @@ const xp = require("simply-xp");
 module.exports = {
   name: "rank",
   description: "Shows user's rank.",
+  aliases: ["xp"],
   /**
    *
    * @param {Client} client

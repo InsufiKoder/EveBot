@@ -20,9 +20,7 @@ module.exports = {
     const amountToBet = parseInt(args[0]);
 
     if ((await economy.get(userID, "wallet")) < amountToBet)
-      return message.reply("You have insufficient amount of money to gamble.");
-
-    await economy.take(userID, amountToBet, "wallet");
+      return message.reply("Be careful, you are betting more than you have.");
 
     function random() {
       const num = Math.floor(Math.random() * 2);
@@ -35,6 +33,7 @@ module.exports = {
       await economy.give(userID, WinAmount, "wallet");
     } else {
       message.channel.send(`You have lost ${amountToBet}.`);
+      await economy.take(userID, amountToBet, "wallet");
     }
   },
 };
