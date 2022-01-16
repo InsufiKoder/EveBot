@@ -2,7 +2,6 @@ const client = require("../..");
 const economy = require("discord-bot-eco");
 
 client.on("ready", () => {
-  economy.setURL(process.env.MONGOURI);
   economy.setConfig({
     currency: "$",
     allowBankruptcy: false,

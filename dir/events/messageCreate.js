@@ -1,4 +1,5 @@
 const client = require("../../index");
+const xp = require("simply-xp");
 
 client.on("messageCreate", async (message) => {
   if (
@@ -19,4 +20,9 @@ client.on("messageCreate", async (message) => {
 
   if (!command) return;
   await command.run(client, message, args);
+
+  xp.addXP(message, message.author.id, message.guild.id, {
+    min: 1,
+    max: 30,
+  });
 });
