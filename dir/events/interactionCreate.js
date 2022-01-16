@@ -23,10 +23,10 @@ client.on("interactionCreate", async (interaction) => {
     );
 
     //Global permissions handler
-    //if (!interaction.member.permissions.has(cmd.userPermissions || []))
-    //return interaction.followUp({
-    //content: "You don't have the permissions to use this command!",
-    //});
+    if (!interaction.member.permissions.has(cmd.userPermissions || []))
+      return interaction.followUp({
+        content: "You don't have the permissions to use this command!",
+      });
 
     cmd.run(client, interaction, args);
   }

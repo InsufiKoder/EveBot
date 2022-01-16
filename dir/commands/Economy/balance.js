@@ -17,7 +17,7 @@ module.exports = {
       const walletbalance = await economy.get(userid, "wallet");
       const bankbalance = await economy.get(userid, "bank");
 
-      // Turn user id's into mentions
+      // Turn user's id into mentions
       const user =
         message.guild.members.cache.get(userid) ||
         message.guild.members.cache.find(
