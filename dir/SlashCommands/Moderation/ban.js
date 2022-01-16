@@ -35,6 +35,7 @@ module.exports = {
       .setTitle("An error occured")
       .setDescription("An error occured. Please try again.")
       .setTimestamp();
+
     const banned = new MessageEmbed()
       .setColor("RANDOM")
       .setTitle("Success!")
@@ -42,6 +43,7 @@ module.exports = {
         `Banned ${target.user.tag} successfully. reason: ${reason}`
       )
       .setTimestamp();
+
     const targetsend = new MessageEmbed()
       .setColor("RANDOM")
       .setTitle("You are banned")
@@ -49,6 +51,7 @@ module.exports = {
         `You have been banned from ${interaction.guild.name}, reason: ${reason}`
       )
       .setTimestamp();
+
     const equalembed = new MessageEmbed()
       .setColor("RANDOM")
       .setTitle("Equal/Higher role")
