@@ -22,7 +22,7 @@ module.exports = {
         .setColor("RANDOM")
         .setTitle("Balance")
         .setDescription(
-          `Their wallet balance is ${walletbalance}. \nTheir bank balance is ${bankbalance}.`
+          `Wallet balance is ${walletbalance}. \nBank balance is ${bankbalance}.`
         )
         .setTimestamp();
       // Embeds end

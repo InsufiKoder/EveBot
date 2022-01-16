@@ -14,13 +14,30 @@ module.exports = {
   run: async (client, message, args) => {
     const userid = message.author.id;
     const convert = parseInt(args);
+
     // Embeds start
     const replyembed = new MessageEmbed()
       .setColor("RANDOM")
       .setTitle("Success!")
       .setDescription(`Withdrew ${convert}!`)
       .setTimestamp();
+
+    const args0embed = new MessageEmbed()
+      .setColor("RANDOM")
+      .setTitle("Error")
+      .setDescription("Please insert an amount more than 0.")
+      .setTimestamp();
+
+    const isnanembed = new MessageEmbed()
+      .setColor("RANDOM")
+      .setTitle("Error")
+      .setDescription("Argument must be a number.")
+      .setTimestamp();
     // Embeds end
+
+    if (args[0] == 0) return message.reply({ embeds: [args0embed] });
+
+    if (isNaN(args[0])) return message.reply({ embeds: [isnanembed] });
 
     try {
       await economy.withdraw(userid, convert);
@@ -30,7 +47,7 @@ module.exports = {
       const errorembed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Error")
-        .setDescription("Please insert an amount greater than 0.")
+        .setDescription("An error occured. Please try again.")
         .setTimestamp();
       // Embeds end
 

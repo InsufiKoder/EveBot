@@ -12,8 +12,8 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
-    const usrid = message.mentions.users.first().id;
-    const convert = parseInt(args);
+    const usrid = message.mentions.users.first()?.id;
+    const convert = parseInt(args[1]);
 
     // Embeds start
     const replyembed = new MessageEmbed()
@@ -21,7 +21,23 @@ module.exports = {
       .setTitle("Success!")
       .setDescription(`Sucessfully sent ${convert}!`)
       .setTimestamp();
+
+    const args0embed = new MessageEmbed()
+      .setColor("RANDOM")
+      .setTitle("Error")
+      .setDescription("Please insert an amount more than 0.")
+      .setTimestamp();
+
+    const isnanembed = new MessageEmbed()
+      .setColor("RANDOM")
+      .setTitle("Error")
+      .setDescription("Argument must be a number.")
+      .setTimestamp();
     // Embeds end
+
+    if (args[1] == 0) return message.reply({ embeds: [args0embed] });
+
+    if (isNaN(args[1])) return message.reply({ embeds: [isnanembed] });
 
     try {
       await economy.give(usrid, convert, "wallet");
@@ -32,7 +48,7 @@ module.exports = {
         .setColor("RANDOM")
         .setTitle("Error")
         .setDescription(
-          "You should insert the amount first before mentioning the user."
+          "You should mention the user first before inserting the amount."
         )
         .setTimestamp();
       // Embeds end

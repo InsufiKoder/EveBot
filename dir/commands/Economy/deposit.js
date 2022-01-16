@@ -14,12 +14,6 @@ module.exports = {
   run: async (client, message, args) => {
     try {
       const userid = message.author.id;
-
-      if (args[0] == 0)
-        return message.reply("Please insert an amount more than 0.");
-
-      if (isNaN(args[0])) return message.reply("Argument must be a number.");
-
       const amount = parseInt(args[0]);
 
       // Embeds start
@@ -28,7 +22,23 @@ module.exports = {
         .setTitle("Success!")
         .setDescription(`Deposited ${amount}!`)
         .setTimestamp();
+
+      const args0embed = new MessageEmbed()
+        .setColor("RANDOM")
+        .setTitle("Error")
+        .setDescription("Please insert an amount more than 0.")
+        .setTimestamp();
+
+      const isnanembed = new MessageEmbed()
+        .setColor("RANDOM")
+        .setTitle("Error")
+        .setDescription("Argument must be a number.")
+        .setTimestamp();
       // Embeds end
+
+      if (args[0] == 0) return message.reply({ embeds: [args0embed] });
+
+      if (isNaN(args[0])) return message.reply({ embeds: [isnanembed] });
 
       await economy.deposit(userid, amount);
       message.reply({ embeds: [replyembed] });
