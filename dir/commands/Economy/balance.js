@@ -13,7 +13,7 @@ module.exports = {
    */
   run: async (client, message, args) => {
     try {
-      const userid = message.mentions.users.first().id;
+      const userid = message.mentions.users.first()?.id || message.author.id;
       const walletbalance = await economy.get(userid, "wallet");
       const bankbalance = await economy.get(userid, "bank");
 
@@ -29,19 +29,15 @@ module.exports = {
 
       message.reply({ embeds: [replyembed] });
     } catch (err) {
-      const authorid = message.author.id;
-      const walletbalance2 = await economy.get(authorid, "wallet");
-      const bankbalance2 = await economy.get(authorid, "bank");
-      // Embeds start
-      const AuthorEmbed = new MessageEmbed()
+      const errorembed = new MessageEmbed()
         .setColor("RANDOM")
-        .setTitle("Balance")
-        .setDescription(
-          `Your wallet balance is ${walletbalance2}. \nYour bank balance is ${bankbalance2}.`
-        )
+        .setTitle("Error")
+        .setDescription("An error occured. Please try again later.")
         .setTimestamp();
 
-      message.reply({ embeds: [AuthorEmbed] });
+      message.reply({ embeds: [errorembed] });
+
+      console.log(err);
     }
   },
 };
