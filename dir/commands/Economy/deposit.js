@@ -13,7 +13,7 @@ module.exports = {
    */
   run: async (client, message, args) => {
     try {
-      const userid = message.author.id;
+      const userid = message.author?.id;
       const amount = parseInt(args[0]);
 
       // Embeds start
@@ -39,6 +39,11 @@ module.exports = {
       if (args[0] == 0) return message.reply({ embeds: [args0embed] });
 
       if (isNaN(args[0])) return message.reply({ embeds: [isnanembed] });
+
+      if ((await economy.get(userid, "wallet")) < amount)
+        return message.reply(
+          "You have insufficient amount of money to deposit."
+        );
 
       await economy.deposit(userid, amount);
       message.reply({ embeds: [replyembed] });

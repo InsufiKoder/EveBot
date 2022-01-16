@@ -17,12 +17,22 @@ module.exports = {
       const walletbalance = await economy.get(userid, "wallet");
       const bankbalance = await economy.get(userid, "bank");
 
+      // Turn user id's into mentions
+      const user =
+        message.guild.members.cache.get(userid) ||
+        message.guild.members.cache.find(
+          (m) => m.user.tag.toLowerCase() == string.toLowerCase()
+        ) ||
+        message.guild.members.cache.find(
+          (m) => m.nickname.toLowerCase() == string.toLowerCase()
+        );
+
       // Embeds start
       const replyembed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Balance")
         .setDescription(
-          `Wallet balance is ${walletbalance}. \nBank balance is ${bankbalance}.`
+          `${user}'s Wallet balance is ${walletbalance}. \n${user}'s Bank balance is ${bankbalance}.`
         )
         .setTimestamp();
       // Embeds end

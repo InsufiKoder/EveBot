@@ -39,6 +39,11 @@ module.exports = {
 
     if (isNaN(args[0])) return message.reply({ embeds: [isnanembed] });
 
+    if ((await economy.get(userid, "bank")) < convert)
+      return message.reply(
+        "You have insufficient amount of money to withdraw."
+      );
+
     try {
       await economy.withdraw(userid, convert);
       message.reply({ embeds: [replyembed] });

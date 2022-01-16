@@ -12,8 +12,9 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
+    const convert = parseInt(args[0]);
     const usrid = message.mentions.users.first()?.id;
-    const convert = parseInt(args[1]);
+    const authorid = message.author?.id;
 
     // Embeds start
     const replyembed = new MessageEmbed()
@@ -35,9 +36,12 @@ module.exports = {
       .setTimestamp();
     // Embeds end
 
-    if (args[1] == 0) return message.reply({ embeds: [args0embed] });
+    if (args[0] == 0) return message.reply({ embeds: [args0embed] });
 
-    if (isNaN(args[1])) return message.reply({ embeds: [isnanembed] });
+    if (isNaN(args[0])) return message.reply({ embeds: [isnanembed] });
+
+    if ((await economy.get(authorid, "wallet")) < convert)
+      return message.reply("You have insufficient amount of money to give.");
 
     try {
       await economy.give(usrid, convert, "wallet");
