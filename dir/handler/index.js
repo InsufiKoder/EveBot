@@ -47,6 +47,10 @@ module.exports = async (client) => {
   client.on("ready", async () => {
     // Register for a guild only
     const guild = client.guilds.cache.get(client.config.guildid);
+    if (!guild)
+      return console.log(
+        "Unable to register guild commands. No guild id given."
+      );
     await guild.commands.set(arrayOfSlashCommands).then((cmd) => {
       const getRoles = (commandNames) => {
         const permissions = arrayOfSlashCommands.find(
@@ -87,6 +91,6 @@ module.exports = async (client) => {
     });
 
     // Register Globally
-    //await client.application.commands.set(arrayOfSlashCommands);
+    await client.application.commands.set(arrayOfSlashCommands);
   });
 };

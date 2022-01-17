@@ -12,6 +12,7 @@
   "dependencies": {
     "@discordjs/builders": "^0.11.0",
     "axios": "^0.24.0",
+    "better-discord-music": "^1.1.0",
     "cheerio": "^1.0.0-rc.10",
     "discord-bot-eco": "^1.3.4",
     "discord-nsfw": "^1.3.0",
