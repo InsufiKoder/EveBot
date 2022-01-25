@@ -1,7 +1,7 @@
 const { Message, Client } = require("discord.js");
 require("dotenv").config();
 const OpenAI = require("openai-api");
-const openai = new OpenAI(process.env.OPENAI_TOKEN);
+const openai = new OpenAI(process.env.OPENAI_KEY);
 
 let prompt = `EvE is a chatbot that reluctantly answers questions.\n\
 You: How many pounds are in a kilogram?\n\
