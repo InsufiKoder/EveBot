@@ -31,7 +31,7 @@ module.exports = {
         message.author.displayAvatarURL({ dynamic: true })
       )
       .setTimestamp()
-      .setColor(message.guild.me.displayHexColor);
+      .setColor("RANDOM");
 
     message.channel.send({ embeds: [embed] });
   },
