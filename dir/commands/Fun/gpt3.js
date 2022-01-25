@@ -17,6 +17,7 @@ EvE: Nothing much. You?\n`;
 
 module.exports = {
   name: "gpt3",
+  description: "Talk with gpt3!",
   /**
    *
    * @param {Client} client

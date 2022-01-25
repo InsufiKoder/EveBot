@@ -4,6 +4,7 @@ const economy = require("discord-bot-eco");
 module.exports = {
   name: "coinflip",
   aliases: ["cf"],
+  description: "Play coinflip and double your money!",
   /**
    *
    * @param {Client} client

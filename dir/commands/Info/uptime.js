@@ -3,7 +3,8 @@ const moment = require("moment");
 
 module.exports = {
   name: "uptime",
-  aliases: ["up"],
+  description: "Displays uptime.",
+  alias: "up",
   /**
    *
    * @param {Client} client
