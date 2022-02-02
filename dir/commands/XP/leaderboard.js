@@ -13,7 +13,7 @@ module.exports = {
    */
   run: async (client, message, args) => {
     try {
-      await xp.leaderboard(client, message.guild.id, 20).then((board) => {
+      await xp.leaderboard(client, message.guild.id, 10).then((board) => {
         let lead = [];
 
         board.forEach((user) => {
@@ -22,7 +22,7 @@ module.exports = {
 
         const leadembed = new MessageEmbed()
           .setColor("RANDOM")
-          .setTitle("Top 20 Leaderboard")
+          .setTitle("Top 10 Leaderboard")
           .setDescription(` ${lead.toString().replaceAll(",", "\n")} `)
           .setTimestamp();
 

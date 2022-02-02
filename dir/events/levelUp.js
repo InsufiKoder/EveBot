@@ -12,6 +12,6 @@ client.on("levelUp", async (message, data) => {
     .setTimestamp();
 
   message.reply({ embeds: [levelembed] }).then((message) => {
-    setTimeout(() => message.delete(), 5000);
+    setTimeout(() => message.delete(), 2500);
   });
 });

@@ -1,7 +1,9 @@
 const client = require("../..");
 const cmddir = [...new Set(client.commands.map((cmd) => cmd.directory))];
+require("dotenv").config();
 const economy = require("discord-bot-eco");
 const xp = require("simply-xp");
+
 const activities = [
   { name: "Coded by UnusefulCoder#0001", type: "PLAYING" },
   { name: "-help", type: "LISTENING" },
