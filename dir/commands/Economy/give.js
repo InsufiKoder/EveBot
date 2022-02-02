@@ -45,6 +45,7 @@ module.exports = {
 
     try {
       await economy.give(usrid, convert, "wallet");
+      await economy.take(authorid, convert, "wallet");
       message.reply({ embeds: [replyembed] });
     } catch (err) {
       // Embeds start
