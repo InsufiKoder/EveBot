@@ -36,13 +36,13 @@ module.exports = {
           "Robbed user should at least have 7500 coins in their wallet."
         );
 
-      let number = Math.floor(Math.random() * 5009) + 1;
+      let number = Math.floor(Math.random() * 5000) + 1;
       await economy.take(robbedUserID, number, "wallet");
       await economy.give(userID, number, "wallet");
 
       const balance = await economy.get(userID, "wallet");
 
-      message.reply(`Robbed ${number}! your balance is now ${balance}.`);
+      message.reply(`Robbed ${number} coins! you now have ${balance} coins.`);
       cooldown.add(message.author.id);
     }
   },
