@@ -33,6 +33,5 @@ client.on("ready", () => {
     ],
   });
 
-  console.log("MongoDB Ready!");
   console.log("Economy System Ready!");
 });
