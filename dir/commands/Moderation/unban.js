@@ -40,7 +40,7 @@ module.exports = {
         message.author.displayAvatarURL({ dynamic: true })
       )
       .setTimestamp()
-      .setColor("GREEN");
+      .setColor("RANDOM");
 
     message.channel.send({ embeds: [embed] });
   },
