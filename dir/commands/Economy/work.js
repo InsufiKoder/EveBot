@@ -14,28 +14,32 @@ module.exports = {
    **/
   run: async (client, message, args) => {
     const userid = message.author.id;
-    // Embeds start
+
     const replyembed = new MessageEmbed()
       .setColor("RANDOM")
       .setTitle("Cooldown")
       .setDescription(
-        "You should wait 5 seconds before using this command again."
+        "You should wait 5 minutes before using this command again."
       )
       .setTimestamp();
-    // Embeds end
 
     setTimeout(() => {
       cooldown.delete(message.author.id);
-    }, 5000);
+    }, 300000);
 
     if (cooldown.has(message.author.id)) {
       message.reply({ embeds: [replyembed] });
     } else {
-      economy.work(userid, 25, 250);
+      let number = Math.floor(Math.random() * 1500) + 1;
+      await economy.give(userid, number, "wallet");
+
+      const balance = await economy.get(userid, "wallet");
 
       message.reply("Working...").then((message) => {
         setTimeout(function () {
-          message.edit("Success!");
+          message.edit(
+            `Success! you earned ${number} coins. You now have ${balance} coins.`
+          );
         }, 2500);
       });
       cooldown.add(message.author.id);

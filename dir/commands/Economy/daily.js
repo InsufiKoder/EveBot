@@ -13,10 +13,6 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
-    const userid = message.author.id;
-    const amount = 2500;
-
-    // Embeds start
     const cooldownembed = new MessageEmbed()
       .setColor("RANDOM")
       .setTitle("Cooldown")
@@ -25,13 +21,6 @@ module.exports = {
       )
       .setTimestamp();
 
-    const replyembed = new MessageEmbed()
-      .setColor("RANDOM")
-      .setTitle("Success!")
-      .setDescription(`${amount} added to your wallet!`)
-      .setTimestamp();
-    // Embeds end
-
     setTimeout(() => {
       cooldown.delete(message.author.id);
     }, 86400000);
@@ -39,9 +28,16 @@ module.exports = {
     if (cooldown.has(message.author.id)) {
       message.reply({ embeds: [cooldownembed] });
     } else {
-      await economy.daily(userid, amount);
+      let number = Math.floor(Math.random() * 10000) + 1;
+      const userid = message.author.id;
 
-      message.reply({ embeds: [replyembed] });
+      await economy.give(userid, number, "wallet");
+
+      const balance = await economy.get(userid, "wallet");
+
+      message.reply(
+        `Success! You earned ${number} coins. You now have ${balance} coins.`
+      );
       cooldown.add(message.author.id);
     }
   },
