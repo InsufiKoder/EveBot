@@ -19,6 +19,7 @@ module.exports = {
     if (isNaN(args[0])) return message.reply("Argument must be a number.");
 
     const amountToBet = parseInt(args[0]);
+    await economy.take(userID, amountToBet, "wallet");
 
     if ((await economy.get(userID, "wallet")) < amountToBet)
       return message.reply("Be careful, you are betting more than you have.");
@@ -34,7 +35,6 @@ module.exports = {
       await economy.give(userID, WinAmount, "wallet");
     } else {
       message.channel.send(`You have lost ${amountToBet}.`);
-      await economy.take(userID, amountToBet, "wallet");
     }
   },
 };
