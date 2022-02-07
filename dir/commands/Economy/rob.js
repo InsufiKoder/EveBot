@@ -12,38 +12,42 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
-    const userID = message.author.id;
-    const robbedUserID = message.mentions.users.first()?.id;
-    const robbedBalance = await economy.get(robbedUserID, "wallet");
+    try {
+      const userID = message.author.id;
+      const robbedUserID = message.mentions.users.first()?.id || args[0];
+      const robbedBalance = await economy.get(robbedUserID, "wallet");
 
-    const cooldownembed = new MessageEmbed()
-      .setColor("RANDOM")
-      .setTitle("Cooldown")
-      .setDescription(
-        "You should wait 30 minutes before using this command again."
-      )
-      .setTimestamp();
+      const cooldownembed = new MessageEmbed()
+        .setColor("RANDOM")
+        .setTitle("Cooldown")
+        .setDescription(
+          "You should wait 30 minutes before using this command again."
+        )
+        .setTimestamp();
 
-    setTimeout(() => {
-      cooldown.delete(message.author.id);
-    }, 1800000);
+      setTimeout(() => {
+        cooldown.delete(message.author.id);
+      }, 1800000);
 
-    if (cooldown.has(message.author.id)) {
-      message.reply({ embeds: [cooldownembed] });
-    } else {
-      if (robbedBalance < "7500")
-        return message.reply(
-          "Robbed user should at least have 7500 coins in their wallet."
-        );
+      if (cooldown.has(message.author.id)) {
+        message.reply({ embeds: [cooldownembed] });
+      } else {
+        if (robbedBalance < "7500")
+          return message.reply(
+            "Robbed user should at least have 7500 coins in their wallet."
+          );
 
-      let number = Math.floor(Math.random() * 5000) + 1;
-      await economy.take(robbedUserID, number, "wallet");
-      await economy.give(userID, number, "wallet");
+        let number = Math.floor(Math.random() * 5000) + 1;
+        await economy.take(robbedUserID, number, "wallet");
+        await economy.give(userID, number, "wallet");
 
-      const balance = await economy.get(userID, "wallet");
+        const balance = await economy.get(userID, "wallet");
 
-      message.reply(`Robbed ${number} coins! you now have ${balance} coins.`);
-      cooldown.add(message.author.id);
+        message.reply(`Robbed ${number} coins! you now have ${balance} coins.`);
+        cooldown.add(message.author.id);
+      }
+    } catch (err) {
+      message.reply("An error occured. Please try again.");
     }
   },
 };

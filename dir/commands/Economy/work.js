@@ -13,36 +13,40 @@ module.exports = {
    * @param {String[]} args
    **/
   run: async (client, message, args) => {
-    const userid = message.author.id;
+    try {
+      const userid = message.author.id;
 
-    const replyembed = new MessageEmbed()
-      .setColor("RANDOM")
-      .setTitle("Cooldown")
-      .setDescription(
-        "You should wait 5 minutes before using this command again."
-      )
-      .setTimestamp();
+      const replyembed = new MessageEmbed()
+        .setColor("RANDOM")
+        .setTitle("Cooldown")
+        .setDescription(
+          "You should wait 5 minutes before using this command again."
+        )
+        .setTimestamp();
 
-    setTimeout(() => {
-      cooldown.delete(message.author.id);
-    }, 300000);
+      setTimeout(() => {
+        cooldown.delete(message.author.id);
+      }, 300000);
 
-    if (cooldown.has(message.author.id)) {
-      message.reply({ embeds: [replyembed] });
-    } else {
-      let number = Math.floor(Math.random() * 1500) + 1;
-      await economy.give(userid, number, "wallet");
+      if (cooldown.has(message.author.id)) {
+        message.reply({ embeds: [replyembed] });
+      } else {
+        let number = Math.floor(Math.random() * 1500) + 1;
+        await economy.give(userid, number, "wallet");
 
-      const balance = await economy.get(userid, "wallet");
+        const balance = await economy.get(userid, "wallet");
 
-      message.reply("Working...").then((message) => {
-        setTimeout(function () {
-          message.edit(
-            `Success! you earned ${number} coins. You now have ${balance} coins.`
-          );
-        }, 2500);
-      });
-      cooldown.add(message.author.id);
+        message.reply("Working...").then((message) => {
+          setTimeout(function () {
+            message.edit(
+              `Success! you earned ${number} coins. You now have ${balance} coins.`
+            );
+          }, 2500);
+        });
+        cooldown.add(message.author.id);
+      }
+    } catch (err) {
+      message.reply("An error occured. Please try again.");
     }
   },
 };

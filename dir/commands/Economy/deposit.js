@@ -57,7 +57,6 @@ module.exports = {
       // Embeds end
 
       message.reply({ embeds: [errorembed] });
-      console.log(err);
     }
   },
 };

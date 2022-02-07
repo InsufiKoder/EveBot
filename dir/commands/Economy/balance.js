@@ -13,7 +13,8 @@ module.exports = {
    */
   run: async (client, message, args) => {
     try {
-      const userid = message.mentions.users.first()?.id || message.author.id;
+      const userid =
+        message.mentions.users.first()?.id || args[0] || message.author.id;
       const walletbalance = await economy.get(userid, "wallet");
       const bankbalance = await economy.get(userid, "bank");
 
