@@ -14,53 +14,35 @@ module.exports = {
   run: async (client, message, args) => {
     try {
       const userid = message.author.id;
-      const convert = parseInt(args);
+      let convert = parseInt(args[0]);
 
-      // Embeds start
-      const replyembed = new MessageEmbed()
-        .setColor("RANDOM")
-        .setTitle("Success!")
-        .setDescription(`Withdrew ${convert}!`)
-        .setTimestamp();
+      if (args[0] == 0)
+        return message.reply("Please insert an amount more than 0.");
 
-      const args0embed = new MessageEmbed()
-        .setColor("RANDOM")
-        .setTitle("Error")
-        .setDescription("Please insert an amount more than 0.")
-        .setTimestamp();
-
-      const isnanembed = new MessageEmbed()
-        .setColor("RANDOM")
-        .setTitle("Error")
-        .setDescription("Argument must be a number.")
-        .setTimestamp();
-      // Embeds end
-
-      if (args[0] == 0) return message.reply({ embeds: [args0embed] });
-
-      if (isNaN(args[0])) return message.reply({ embeds: [isnanembed] });
+      if (isNaN(args[0])) {
+        if (args[0] === "all") {
+          convert = await economy.get(userid, "bank");
+        } else {
+          return message.reply("Argument must be a number.");
+        }
+      }
 
       if ((await economy.get(userid, "bank")) < convert)
         return message.reply(
           "You have insufficient amount of money to withdraw."
         );
 
-      try {
-        await economy.withdraw(userid, convert);
-        message.reply({ embeds: [replyembed] });
-      } catch (err) {
-        // Embeds start
-        const errorembed = new MessageEmbed()
-          .setColor("RANDOM")
-          .setTitle("Error")
-          .setDescription("An error occured. Please try again.")
-          .setTimestamp();
-        // Embeds end
+      const replyembed = new MessageEmbed()
+        .setColor("RANDOM")
+        .setTitle("Success!")
+        .setDescription(`Withdrew ${convert}!`)
+        .setTimestamp();
 
-        message.reply({ embeds: [errorembed] });
-      }
+      await economy.withdraw(userid, convert);
+      message.reply({ embeds: [replyembed] });
     } catch (err) {
-      message.reply("An error occured. Please try again.");
+      //message.reply("An error occured. Please try again.");
+      console.log(err);
     }
   },
 };

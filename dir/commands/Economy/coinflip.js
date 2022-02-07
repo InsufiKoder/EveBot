@@ -14,14 +14,20 @@ module.exports = {
   run: async (client, message, args) => {
     try {
       const userID = message.author?.id;
+      const getwallet = await economy.get(userID, "wallet");
+      let bet = args[0];
+      let amountToBet = parseInt(bet);
 
-      if (!args[0]) return message.reply("Please specify an amount to bet.");
+      if (!bet) return message.reply("Please specify an amount to bet.");
+      if (isNaN(bet)) {
+        if (bet === "all") {
+          amountToBet = await economy.get(userID, "wallet");
+        } else {
+          return message.reply("Argument must be a number.");
+        }
+      }
 
-      if (isNaN(args[0])) return message.reply("Argument must be a number.");
-
-      const amountToBet = parseInt(args[0]);
-
-      if ((await economy.get(userID, "wallet")) < amountToBet)
+      if (getwallet < amountToBet)
         return message.reply("Be careful, you are betting more than you have.");
 
       await economy.take(userID, amountToBet, "wallet");
@@ -39,7 +45,7 @@ module.exports = {
         message.channel.send(`You have lost ${amountToBet}.`);
       }
     } catch (err) {
-      message.reply("An error occured. Please try again.");
+      console.log(err);
     }
   },
 };
