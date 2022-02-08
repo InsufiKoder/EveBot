@@ -33,7 +33,7 @@ module.exports = {
         .setColor("RANDOM")
         .setTitle("Balance")
         .setDescription(
-          `${user} has ${walletbalance} coins. \n${user} has ${bankbalance} in their bank.`
+          `${user} has ${walletbalance} coins. \n${user} has ${bankbalance} coins in their bank.`
         )
         .setTimestamp();
       // Embeds end
