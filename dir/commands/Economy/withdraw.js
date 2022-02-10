@@ -35,7 +35,7 @@ module.exports = {
       const replyembed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Success!")
-        .setDescription(`Withdrew ${convert}!`)
+        .setDescription(`Withdrew ${convert} coins!`)
         .setTimestamp();
 
       await economy.withdraw(userid, convert);

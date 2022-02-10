@@ -21,7 +21,7 @@ module.exports = {
       const replyembed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Success!")
-        .setDescription(`Sucessfully sent ${convert}!`)
+        .setDescription(`Sucessfully sent ${convert} coins!`)
         .setTimestamp();
 
       const args0embed = new MessageEmbed()

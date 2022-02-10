@@ -30,7 +30,7 @@ module.exports = {
       const replyembed = new MessageEmbed()
         .setColor("RANDOM")
         .setTitle("Success!")
-        .setDescription(`Deposited ${amount}!`)
+        .setDescription(`Deposited ${amount} coins!`)
         .setTimestamp();
 
       if ((await economy.get(userid, "wallet")) < amount)

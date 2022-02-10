@@ -39,10 +39,10 @@ module.exports = {
 
       if (random() === true) {
         const WinAmount = amountToBet * 2;
-        message.channel.send(`Congrats! You have won ${WinAmount}.`);
+        message.channel.send(`Congrats! You have won ${WinAmount} coins.`);
         await economy.give(userID, WinAmount, "wallet");
       } else {
-        message.channel.send(`You have lost ${amountToBet}.`);
+        message.channel.send(`You have lost ${amountToBet} coins.`);
       }
     } catch (err) {
       console.log(err);
