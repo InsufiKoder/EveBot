@@ -11,10 +11,7 @@ module.exports = {
    */
   run: async (client, message, args) => {
     try {
-      const target =
-        message.mentions.members.first() ||
-        message.guild.members.cache.get(args[0]) ||
-        message.author;
+      const target = args.slice(0).join(" ") || message.author.username;
 
       let ppSize = Math.floor(Math.random() * 50) + 1;
 
@@ -24,7 +21,7 @@ module.exports = {
         .setDescription(`${target}'s dick size is: 8` + `${ppSize}` + "D")
         .setColor("RANDOM");
 
-      message.channel.send({ embeds: [ppSizeEmbed] });
+      message.reply({ embeds: [ppSizeEmbed] });
     } catch (err) {
       message.reply("An error occured. Please try again.");
     }

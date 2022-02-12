@@ -11,11 +11,7 @@ module.exports = {
    */
   run: async (client, message, args) => {
     try {
-      const target =
-        message.mentions.members.first() ||
-        message.guild.members.cache.get(args[0]) ||
-        message.author;
-
+      const target = args.slice(0).join(" ") || message.author.username;
       const rng = Math.floor(Math.random() * 101);
 
       const howgayembed = new MessageEmbed()
@@ -23,7 +19,7 @@ module.exports = {
         .setDescription(`${target} is ` + rng + "% Gay🌈")
         .setColor("RANDOM");
 
-      message.channel.send({ embeds: [howgayembed] });
+      message.reply({ embeds: [howgayembed] });
     } catch (err) {
       message.reply("An error occured. Please try again.");
     }
