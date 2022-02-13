@@ -17,6 +17,10 @@ module.exports = {
 
       ppSize = "=".repeat(ppSize);
       const ppSizeEmbed = new MessageEmbed()
+        .setAuthor(
+          message.author.tag,
+          message.author.displayAvatarURL({ dyanmic: true })
+        )
         .setTitle(`Dick Size Calculator`)
         .setDescription(`${target}'s dick size is: 8` + `${ppSize}` + "D")
         .setColor("RANDOM");

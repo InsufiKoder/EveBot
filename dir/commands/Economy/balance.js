@@ -31,6 +31,10 @@ module.exports = {
       // Embeds start
       const replyembed = new MessageEmbed()
         .setColor("RANDOM")
+        .setAuthor(
+          message.author.tag,
+          message.author.displayAvatarURL({ dyanmic: true })
+        )
         .setTitle("Balance")
         .setDescription(
           `${user} has ${walletbalance} coins. \n${user} has ${bankbalance} coins in their bank.`

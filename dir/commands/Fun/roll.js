@@ -22,6 +22,10 @@ module.exports = {
       );
 
     const embed = new MessageEmbed()
+      .setAuthor(
+        message.author.tag,
+        message.author.displayAvatarURL({ dyanmic: true })
+      )
       .setTitle("🎲  Dice Roll  🎲")
       .setDescription(`${message.member}, you rolled a **${n}**!`)
       .setFooter(

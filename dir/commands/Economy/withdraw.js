@@ -34,6 +34,10 @@ module.exports = {
 
       const replyembed = new MessageEmbed()
         .setColor("RANDOM")
+        .setAuthor(
+          message.author.tag,
+          message.author.displayAvatarURL({ dyanmic: true })
+        )
         .setTitle("Success!")
         .setDescription(`Withdrew ${convert} coins!`)
         .setTimestamp();

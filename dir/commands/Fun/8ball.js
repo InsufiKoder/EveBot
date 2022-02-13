@@ -42,6 +42,10 @@ module.exports = {
 
     const embed = new MessageEmbed()
       .setTitle("🎱  The Magic 8-Ball  🎱")
+      .setAuthor(
+        message.author.tag,
+        message.author.displayAvatarURL({ dyanmic: true })
+      )
       .addField("Question", question)
       .addField(
         "Answer",

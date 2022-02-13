@@ -26,6 +26,10 @@ module.exports = {
 
       const args0embed = new MessageEmbed()
         .setColor("RANDOM")
+        .setAuthor(
+          message.author.tag,
+          message.author.displayAvatarURL({ dyanmic: true })
+        )
         .setTitle("Error")
         .setDescription("Please insert an amount more than 0.")
         .setTimestamp();

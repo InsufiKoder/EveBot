@@ -15,6 +15,10 @@ module.exports = {
       const rng = Math.floor(Math.random() * 101);
 
       const howgayembed = new MessageEmbed()
+        .setAuthor(
+          message.author.tag,
+          message.author.displayAvatarURL({ dyanmic: true })
+        )
         .setTitle(`Gay Machine Calculator`)
         .setDescription(`${target} is ` + rng + "% Gay🌈")
         .setColor("RANDOM");

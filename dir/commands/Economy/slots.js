@@ -39,6 +39,10 @@ module.exports = {
       }
       if (win) {
         let slotsEmbed1 = new MessageEmbed()
+          .setAuthor(
+            message.author.tag,
+            message.author.displayAvatarURL({ dyanmic: true })
+          )
           .setDescription(
             `${slotItems[number[0]]} | ${slotItems[number[1]]} | ${
               slotItems[number[2]]
@@ -50,6 +54,10 @@ module.exports = {
         await economy.give(author, money, "wallet");
       } else {
         let slotsEmbed = new MessageEmbed()
+          .setAuthor(
+            message.author.tag,
+            message.author.displayAvatarURL({ dyanmic: true })
+          )
           .setDescription(
             `${slotItems[number[0]]} | ${slotItems[number[1]]} | ${
               slotItems[number[2]]

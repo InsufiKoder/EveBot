@@ -19,6 +19,10 @@ module.exports = {
 
       const cooldownembed = new MessageEmbed()
         .setColor("RANDOM")
+        .setAuthor(
+          message.author.tag,
+          message.author.displayAvatarURL({ dyanmic: true })
+        )
         .setTitle("Cooldown")
         .setDescription(
           "You should wait 30 minutes before using this command again."
