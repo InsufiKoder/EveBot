@@ -11,5 +11,6 @@ module.exports = {
    */
   run: async (client, message, args) => {
     client.distube.voices.leave(message);
+    message.reply("Left the voice channel.");
   },
 };
