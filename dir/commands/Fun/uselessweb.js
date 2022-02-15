@@ -1,5 +1,5 @@
 const { Message, Client } = require("discord.js");
-const webList = require("../../uselessweblist.js").varToExport;
+const webList = require("../../uselessweblist.js").webListvar;
 
 module.exports = {
   name: "uselessweb",

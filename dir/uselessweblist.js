@@ -92,4 +92,4 @@ var webList = [
   "https://creativetechguy.com/fishfeeder",
   "https://joquotes.webflow.io/",
 ];
-module.exports = { varToExport: webList };
+module.exports = { webListvar: webList };
