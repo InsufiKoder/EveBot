@@ -55,6 +55,7 @@ client.on("messageCreate", async (message) => {
       "MANAGE_ROLES",
       "MANAGE_WEBHOOKS",
       "MANAGE_EMOJIS",
+      "MODERATE_MEMBERS",
     ];
 
     if (command.permissions && command.permissions.length) {
