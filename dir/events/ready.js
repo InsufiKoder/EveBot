@@ -31,8 +31,6 @@ client.on("ready", () => {
     activity++;
   }, 5000);
 
-  // XP And Economy setup
-  economy.setURL(process.env.MONGOURI);
   xp.connect(process.env.MONGOURI);
 
   console.log("Command Directories: ", cmddir);

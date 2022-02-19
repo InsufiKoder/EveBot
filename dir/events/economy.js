@@ -1,8 +1,10 @@
 const client = require("../..");
+require("dotenv").config();
 const economy = require("discord-bot-eco");
 
 client.on("ready", () => {
   economy.setConfig({
+    mongoURL: process.env.MONGOURI,
     currency: "$",
     allowBankruptcy: false,
     limits: {
