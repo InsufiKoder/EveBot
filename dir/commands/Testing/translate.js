@@ -19,13 +19,14 @@ module.exports = {
       translate(input, { to: language })
         .then((res) => {
           const replyEmbed = new MessageEmbed()
-            .setAuthor(
-              message.author.tag,
-              message.author.displayAvatarURL({ dyanmic: true })
-            )
             .setTitle(`Translated to: ${language}`)
             .setColor("RANDOM")
-            .setDescription(res)
+            .setDescription(
+              `\`Original Message:\`
+            ${input}\n
+            \`Translated Message:\`
+            ${res}`
+            )
             .setTimestamp();
 
           message.reply({ embeds: [replyEmbed] });

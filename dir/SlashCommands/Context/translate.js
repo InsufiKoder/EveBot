@@ -19,7 +19,7 @@ module.exports = {
           .setTitle("Translated to: english")
           .setDescription(
             `\`Original Message:\`
-            ${msg.content}\n\n
+            ${msg.content}\n
             \`Translated Message:\`
             ${res}`
           )
