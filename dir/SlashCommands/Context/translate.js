@@ -17,7 +17,12 @@ module.exports = {
       .then((res) => {
         const replyEmbed = new MessageEmbed()
           .setTitle("Translated to: english")
-          .setDescription(res)
+          .setDescription(
+            `\`Original Message:\`
+            ${msg.content}\n\n
+            \`Translated Message:\`
+            ${res}`
+          )
           .setColor("RANDOM")
           .setTimestamp();
 
