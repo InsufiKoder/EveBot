@@ -31,7 +31,9 @@ module.exports = {
           message.reply({ embeds: [replyEmbed] });
         })
         .catch((err) => {
-          console.error(err);
+          message.reply(
+            "An error occured. Please make sure you gave the bot a language to translate to."
+          );
         });
     } catch (err) {
       message.reply(
