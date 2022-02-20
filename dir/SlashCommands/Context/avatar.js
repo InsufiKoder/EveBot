@@ -16,7 +16,8 @@ module.exports = {
     const replyEmbed = new MessageEmbed()
       .setTitle(`${user.tag}'s avatar`)
       .setColor("RANDOM")
-      .setImage(user.displayAvatarURL({ dynamic: true }));
+      .setImage(user.displayAvatarURL({ dynamic: true }))
+      .setTimestamp();
 
     interaction.followUp({
       embeds: [replyEmbed],
