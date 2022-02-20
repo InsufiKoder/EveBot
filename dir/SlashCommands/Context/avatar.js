@@ -14,7 +14,6 @@ module.exports = {
     const user = await client.users.fetch(interaction.targetId);
 
     const replyEmbed = new MessageEmbed()
-      .setAuthor(user.tag)
       .setTitle(`${user.tag}'s avatar`)
       .setColor("RANDOM")
       .setImage(user.displayAvatarURL({ dynamic: true }));
