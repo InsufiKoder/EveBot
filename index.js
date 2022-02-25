@@ -1,5 +1,3 @@
-const discord = require("discord.js");
-const { DisTube } = require("distube");
 require("dotenv").config();
 const { Client, Collection } = require("discord.js");
 
@@ -11,7 +9,7 @@ module.exports = client;
 
 // Global Variables
 client.commands = new Collection();
-client.slashCommands = new Collection();
+client.SlashCommands = new Collection();
 client.config = require("./config.json");
 client.emotes = client.config.emoji;
 

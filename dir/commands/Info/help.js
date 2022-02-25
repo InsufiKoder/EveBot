@@ -12,9 +12,8 @@ module.exports = {
   /**
    * @param {Client} client
    * @param {Message} message
-   * @param {String[]} args
    */
-  run: async (client, message, args) => {
+  run: async (client, message) => {
     const directories = [
       ...new Set(client.commands.map((cmd) => cmd.directory)),
     ];
@@ -61,7 +60,7 @@ module.exports = {
       ),
     ];
 
-    const initialMessage = await message.channel.send({
+    const initialMessage = await message.reply({
       embeds: [embed],
       components: components(false),
     });

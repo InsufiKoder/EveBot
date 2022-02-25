@@ -5,7 +5,7 @@ client.on("interactionCreate", async (interaction) => {
   if (interaction.isCommand()) {
     await interaction.deferReply({ ephemeral: false }).catch(() => {});
 
-    const cmd = client.slashCommands.get(interaction.commandName);
+    const cmd = client.SlashCommands.get(interaction.commandName);
     if (!cmd) return interaction.followUp({ content: "An error has occured " });
 
     const args = [];
