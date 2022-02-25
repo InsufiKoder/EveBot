@@ -2,7 +2,7 @@ const { Client, ContextMenuInteraction, MessageEmbed } = require("discord.js");
 const translate = require("translate-google");
 
 module.exports = {
-  name: "Translate",
+  name: "translate",
   type: "MESSAGE",
   /**
    *

@@ -1,7 +1,7 @@
 const { Client, ContextMenuInteraction, MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "Avatar",
+  name: "avatar",
   type: "USER",
   /**
    *

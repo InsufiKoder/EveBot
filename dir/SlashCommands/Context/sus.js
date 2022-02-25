@@ -1,7 +1,7 @@
 const { Client, ContextMenuInteraction } = require("discord.js");
 
 module.exports = {
-  name: "Sus",
+  name: "sus",
   type: "MESSAGE",
   /**
    *
