@@ -1,4 +1,4 @@
-const { Message, Client } = require("discord.js");
+const { Client, CommandInteraction } = require("discord.js");
 require("dotenv").config();
 const OpenAI = require("openai-api");
 const openai = new OpenAI(process.env.OPENAI_KEY);
@@ -18,15 +18,23 @@ EvE: Nothing much. You?\n`;
 module.exports = {
   name: "gpt3",
   description: "Talk with gpt3!",
+  options: [
+    {
+      name: "query",
+      description: "The thing you want to ask to gpt3",
+      type: "STRING",
+      required: "true",
+    },
+  ],
   /**
    *
    * @param {Client} client
-   * @param {Message} message
-   * @param {String[]} args
+   * @param {CommandInteraction} interaction
    */
-  run: async (client, message, args) => {
-    if (message.author.bot) return;
-    prompt += `You: ${message.content}\n`;
+  run: async (client, interaction) => {
+    if (interaction.user.bot) return;
+    const query = interaction.options.getString("query");
+    prompt += `You: ${query}\n`;
     (async () => {
       const gptResponse = await openai.complete({
         engine: "curie",
@@ -41,7 +49,9 @@ module.exports = {
         stream: false,
         stop: ["\n", "\n\n"],
       });
-      message.reply(`${gptResponse.data.choices[0].text.substring(5)}`);
+      interaction.followUp(
+        `\`${query}\` \n${gptResponse.data.choices[0].text.substring(5)}`
+      );
       prompt += `${gptResponse.data.choices[0].text}\n`;
     })();
   },
