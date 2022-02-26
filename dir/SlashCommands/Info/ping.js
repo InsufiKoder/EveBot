@@ -15,7 +15,11 @@ module.exports = {
       .setColor("RANDOM")
       .setTitle("Ping")
       .setDescription(`${client.ws.ping}ms!`)
-      .setTimestamp();
+      .setTimestamp()
+      .setFooter({
+        text: interaction.user.tag,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+      });
 
     interaction.followUp({ embeds: [replyembed] });
   },
