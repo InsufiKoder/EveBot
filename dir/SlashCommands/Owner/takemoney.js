@@ -3,18 +3,18 @@ const economy = require("discord-bot-eco");
 require("dotenv").config();
 
 module.exports = {
-  name: "givemoney",
-  description: "Used to give money.",
+  name: "takemoney",
+  description: "Used to take money.",
   options: [
     {
       name: "user",
-      description: "The user you want to give money to",
+      description: "The user you want to take money from",
       type: "USER",
       required: "true",
     },
     {
       name: "amount",
-      description: "The amount you want to give",
+      description: "The amount you want to take",
       type: "INTEGER",
       required: "true",
     },
@@ -37,13 +37,10 @@ module.exports = {
     if (interaction.user.id != process.env.OWNERID)
       return interaction.followUp("Only the bot owner can use this command.");
 
+    const takePlace = interaction.options.getString("place");
     const replyEmbed = new MessageEmbed()
       .setTitle("Success!")
-      .setDescription(
-        `Added ${amount} coins to ${target}'s ${interaction.options.getString(
-          "place"
-        )}.`
-      )
+      .setDescription(`Took ${amount} coins from ${target}'s ${takePlace}.`)
       .setColor("RANDOM")
       .setTimestamp()
       .setFooter({
@@ -51,8 +48,7 @@ module.exports = {
         iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
       });
 
-    const givePlace = interaction.options.getString("place");
-    economy.give(target.id, amount, givePlace);
+    economy.take(target.id, amount, takePlace);
     interaction.followUp({ embeds: [replyEmbed] });
   },
 };
