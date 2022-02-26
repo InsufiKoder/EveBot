@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, CommandInteraction } = require("discord.js");
 const moment = require("moment");
 const { mem, cpu, os } = require("node-os-utils");
 const { stripIndent } = require("common-tags");
@@ -9,18 +9,17 @@ module.exports = {
   /**
    *
    * @param {Client} client
-   * @param {Message} message
-   * @param {String[]} args
+   * @param {CommandInteraction} interaction
    */
-  run: async (client, message, args) => {
-    const d = moment.duration(message.client.uptime);
+  run: async (client, interaction) => {
+    const d = moment.duration(interaction.client.uptime);
     const days = d.days() == 1 ? `${d.days()} day` : `${d.days()} days`;
     const hours = d.hours() == 1 ? `${d.hours()} hour` : `${d.hours()} hours`;
     const clientStats = stripIndent`
-          Servers   :: ${message.client.guilds.cache.size}
-          Users     :: ${message.client.users.cache.size}
-          Channels  :: ${message.client.channels.cache.size}
-          WS Ping   :: ${Math.round(message.client.ws.ping)}ms
+          Servers   :: ${interaction.client.guilds.cache.size}
+          Users     :: ${interaction.client.users.cache.size}
+          Channels  :: ${interaction.client.channels.cache.size}
+          WS Ping   :: ${Math.round(interaction.client.ws.ping)}ms
           Uptime    :: ${days} and ${hours}
           Prefix    :: -
        `;
@@ -33,21 +32,22 @@ module.exports = {
           RAM Usage :: ${usedMemMb} MB
         `;
 
-    const embed = new MessageEmbed()
+    const replyEmbed = new MessageEmbed()
       .setTitle("Bot's Statistics")
       .addField(
         "Commands",
-        `\`${message.client.commands.size}\` commands`,
+        `\`${interaction.client.commands.size}\` commands`,
         true
       )
       .addField("Client", `\`\`\`asciidoc\n${clientStats}\`\`\``)
       .addField("Server", `\`\`\`asciidoc\n${serverStats}\`\`\``)
-      .setFooter(
-        message.member.displayName,
-        message.author.displayAvatarURL({ dynamic: true })
-      )
+      .setFooter({
+        text: interaction.user.tag,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+      })
       .setTimestamp()
-      .setColor(message.guild.me.displayHexColor);
-    message.channel.send({ embeds: [embed] });
+      .setColor("RANDOM");
+
+    interaction.followUp({ embeds: [replyEmbed] });
   },
 };
