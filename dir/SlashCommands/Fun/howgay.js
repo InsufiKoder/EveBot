@@ -17,24 +17,20 @@ module.exports = {
    * @param {CommandInteraction} interaction
    */
   run: async (client, interaction) => {
-    try {
-      const input = interaction.options.getString("input");
-      const target = input || interaction.user.username;
-      const rng = Math.floor(Math.random() * 101);
+    const input = interaction.options.getString("input");
+    const target = input || interaction.user.username;
+    const rng = Math.floor(Math.random() * 101);
 
-      const howgayembed = new MessageEmbed()
-        .setTitle(`Gay Machine Calculator`)
-        .setDescription(`${target} is ` + rng + "% Gay🌈")
-        .setColor("RANDOM")
-        .setTimestamp()
-        .setFooter({
-          text: interaction.user.tag,
-          iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
-        });
+    const howgayembed = new MessageEmbed()
+      .setTitle(`Gay Machine Calculator`)
+      .setDescription(`${target} is ` + rng + "% Gay🌈")
+      .setColor("RANDOM")
+      .setTimestamp()
+      .setFooter({
+        text: interaction.user.tag,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+      });
 
-      interaction.followUp({ embeds: [howgayembed] });
-    } catch (err) {
-      interaction.followUp("An error occured. Please try again.");
-    }
+    interaction.followUp({ embeds: [howgayembed] });
   },
 };

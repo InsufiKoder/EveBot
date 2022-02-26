@@ -18,24 +18,20 @@ module.exports = {
    * @param {CommandInteraction} interaction
    */
   run: async (client, interaction) => {
-    try {
-      const input = interaction.options.getString("input");
-      const target = input || interaction.user.username;
-      const rng = Math.floor(Math.random() * 101);
+    const input = interaction.options.getString("input");
+    const target = input || interaction.user.username;
+    const rng = Math.floor(Math.random() * 101);
 
-      const replyEmbed = new MessageEmbed()
-        .setTitle(`Basedness Calculator`)
-        .setDescription(`${target} is ` + rng + "% Based")
-        .setColor("RANDOM")
-        .setTimestamp()
-        .setFooter({
-          text: interaction.user.tag,
-          iconURL: interaction.user.displayAvatarURL({ dyanmic: true }),
-        });
+    const replyEmbed = new MessageEmbed()
+      .setTitle(`Basedness Calculator`)
+      .setDescription(`${target} is ` + rng + "% Based")
+      .setColor("RANDOM")
+      .setTimestamp()
+      .setFooter({
+        text: interaction.user.tag,
+        iconURL: interaction.user.displayAvatarURL({ dyanmic: true }),
+      });
 
-      interaction.followUp({ embeds: [replyEmbed] });
-    } catch (err) {
-      interaction.followUp("An error occured. Please try again.");
-    }
+    interaction.followUp({ embeds: [replyEmbed] });
   },
 };
