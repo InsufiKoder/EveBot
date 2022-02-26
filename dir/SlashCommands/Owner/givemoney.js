@@ -51,16 +51,9 @@ module.exports = {
         iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
       });
 
-    if (interaction.options.getString("place") === "wallet") {
-      economy.give(target.id, amount, "wallet");
-      interaction.followUp({ embeds: [replyEmbed] });
-    } else if (interaction.options.getString("place") === "bank") {
-      economy.give(target.id, amount, "bank");
-      interaction.followUp({ embeds: [replyEmbed] });
-    } else if (interaction.options.getString("place")) {
-      interaction.followUp(
-        "You can only add money to target's bank or wallet."
-      );
-    }
+    const givePlace = interaction.options.getString("place");
+    economy.give(target.id, amount, givePlace);
+
+    interaction.followUp({ embeds: [replyEmbed] });
   },
 };
