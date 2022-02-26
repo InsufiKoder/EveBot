@@ -4,7 +4,6 @@ const economy = require("discord-bot-eco");
 module.exports = {
   name: "balance",
   description: "Shows balance of the mentioned user.",
-  aliases: ["bal"],
   options: [
     {
       name: "user",
