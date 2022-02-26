@@ -1,4 +1,4 @@
-const { Message, Client, MessageEmbed } = require("discord.js");
+const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
 const moment = require("moment");
 
 module.exports = {
@@ -8,11 +8,10 @@ module.exports = {
   /**
    *
    * @param {Client} client
-   * @param {Message} message
-   * @param {String[]} args
+   * @param {CommandInteraction} interaction
    */
-  run: async (client, message, args) => {
-    const d = moment.duration(message.client.uptime);
+  run: async (client, interaction) => {
+    const d = moment.duration(interaction.client.uptime);
     const days = d.days() == 1 ? `${d.days()} day` : `${d.days()} days`;
     const hours = d.hours() == 1 ? `${d.hours()} hour` : `${d.hours()} hours`;
     const minutes =
@@ -21,19 +20,19 @@ module.exports = {
       d.seconds() == 1 ? `${d.seconds()} second` : `${d.seconds()} seconds`;
     const date = moment().subtract(d, "ms").format("dddd, MMMM Do YYYY");
 
-    const embed = new MessageEmbed()
+    const replyEmbed = new MessageEmbed()
       .setTitle("Uptime")
       .setDescription(
         `\`\`\`prolog\n${days}, ${hours}, ${minutes}, and ${seconds}\`\`\``
       )
       .addField("Date Launched", date)
-      .setFooter(
-        message.member.displayName,
-        message.author.displayAvatarURL({ dynamic: true })
-      )
+      .setFooter({
+        text: interaction.user.tag,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+      })
       .setTimestamp()
       .setColor("RANDOM");
 
-    message.channel.send({ embeds: [embed] });
+    interaction.followUp({ embeds: [replyEmbed] });
   },
 };
