@@ -22,7 +22,11 @@ module.exports = {
     const replyEmbed = new MessageEmbed()
       .setColor("RANDOM")
       .setTitle("Search Results:")
-      .setTimestamp();
+      .setTimestamp()
+      .setFooter({
+        text: interaction.user.tag,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+      });
 
     googleIt({
       "no-display": "true",

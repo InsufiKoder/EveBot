@@ -39,7 +39,11 @@ module.exports = {
             \`Translated Message:\`
             ${res}`
           )
-          .setTimestamp();
+          .setTimestamp()
+          .setFooter({
+            text: interaction.user.tag,
+            iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+          });
 
         interaction.followUp({ embeds: [replyEmbed] });
       })

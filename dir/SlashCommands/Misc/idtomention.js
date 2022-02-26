@@ -1,13 +1,14 @@
 const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "getuserid",
-  description: "Returns the provided users id.",
+  name: "idtomention",
+  aliases: "idm",
+  description: "Turns an user id to mention. Only works in current guild.",
   options: [
     {
-      name: "user",
-      description: "The user to get the id of",
-      type: "USER",
+      name: "id",
+      description: "id to turn into mention",
+      type: "STRING",
       required: "true",
     },
   ],
@@ -17,11 +18,15 @@ module.exports = {
    * @param {CommandInteraction} interaction
    */
   run: async (client, interaction) => {
-    const user = interaction.options.getMember("user").id;
+    const user = interaction.guild.members.cache.get(
+      interaction.options.getString("id")
+    );
+
+    if (!user) return interaction.followUp(`Please provide a valid user ID.`);
 
     const replyEmbed = new MessageEmbed()
-      .setTitle("User ID")
-      .setDescription(`The provided user id is \`${user}\`.`)
+      .setTitle("ID To Mention")
+      .setDescription(`The provided user profile is ${user}.`)
       .setColor("RANDOM")
       .setTimestamp()
       .setFooter({
