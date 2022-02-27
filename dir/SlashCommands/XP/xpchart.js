@@ -1,4 +1,4 @@
-const { Message, Client } = require("discord.js");
+const { Client, CommandInteraction } = require("discord.js");
 const xp = require("simply-xp");
 
 module.exports = {
@@ -7,15 +7,14 @@ module.exports = {
   /**
    *
    * @param {Client} client
-   * @param {Message} message
-   * @param {String[]} args
+   * @param {CommandInteraction} interaction
    */
-  run: async (client, message, args) => {
-    xp.charts(message, {
+  run: async (client, interaction) => {
+    xp.charts(interaction, {
       position: 5,
       type: "bar",
     }).then((attach) => {
-      message.reply({ files: [attach] });
+      interaction.followUp({ files: [attach] });
     });
   },
 };

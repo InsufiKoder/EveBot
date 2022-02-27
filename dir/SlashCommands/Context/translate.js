@@ -10,10 +10,10 @@ module.exports = {
    * @param {ContextMenuInteraction} interaction
    * @param {String[]} args
    */
-  run: async (client, interaction, args) => {
+  run: async (client, interaction) => {
     const msg = await interaction.channel.messages.fetch(interaction.targetId);
 
-    translate(msg.content, { to: "en" })
+    translate(msg.content, { to: "english" })
       .then((res) => {
         const replyEmbed = new MessageEmbed()
           .setTitle("Translated to: english")
