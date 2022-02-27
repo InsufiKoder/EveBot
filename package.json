@@ -1,6 +1,6 @@
 {
   "name": "unusefulbot",
-  "version": "1.0.0",
+  "version": "4.0.0",
   "description": "An under development bot project.",
   "engines": {
     "node": "16.x"
