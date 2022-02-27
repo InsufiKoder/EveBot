@@ -1,4 +1,4 @@
-const { Message, Client, MessageEmbed } = require("discord.js");
+const { Client, CommandInteraction } = require("discord.js");
 
 module.exports = {
   name: "skip",
@@ -6,23 +6,22 @@ module.exports = {
   /**
    *
    * @param {Client} client
-   * @param {Message} message
-   * @param {String[]} args
+   * @param {CommandInteraction} interaction
    */
-  run: async (client, message, args) => {
-    const queue = client.distube.getQueue(message);
+  run: async (client, interaction) => {
+    const queue = client.distube.getQueue(interaction);
     if (!queue)
-      return message.channel.send(
+      return interaction.followUp(
         `${client.emotes.error} | There is nothing in the queue right now!`
       );
 
     try {
       const song = await queue.skip();
-      message.channel.send(
+      interaction.followUp(
         `${client.emotes.success} | Skipped! Now playing:\n${song.name}`
       );
     } catch (e) {
-      message.channel.send(`${client.emotes.error} | ${e}`);
+      interaction.followUp(`${client.emotes.error} | ${e}`);
     }
   },
 };
