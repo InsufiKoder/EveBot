@@ -6,7 +6,7 @@ const xp = require("simply-xp");
 
 const activities = [
   { name: "Coded by UnusefulCoder#0001", type: "PLAYING" },
-  { name: "-help", type: "LISTENING" },
+  { name: "/help", type: "LISTENING" },
   { name: "Users", type: "LISTENING" },
   {
     name: "This one will not appear in bot's status. Weird, right?",
