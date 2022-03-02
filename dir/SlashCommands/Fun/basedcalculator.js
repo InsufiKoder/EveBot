@@ -66,6 +66,6 @@ module.exports = {
         iconURL: interaction.user.displayAvatarURL({ dyanmic: true }),
       });
 
-    interaction.followUp({ embeds: [replyEmbed] });
+    interaction.editReply({ embeds: [replyEmbed] });
   },
 };
