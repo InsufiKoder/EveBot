@@ -54,10 +54,11 @@ module.exports = {
 
     const first = type.charAt(0).toUpperCase();
     const rest = type.slice(1);
+    const all = first + rest;
 
     const replyEmbed = new MessageEmbed()
-      .setTitle(`${first}${rest}ness Calculator`)
-      .setDescription(`${target} is ` + rng + `% ${first}${rest}`)
+      .setTitle(`${all}ness Calculator`)
+      .setDescription(`${target} is ` + rng + `% ${all}`)
       .setColor("RANDOM")
       .setTimestamp()
       .setFooter({
