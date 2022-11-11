@@ -44,6 +44,7 @@ module.exports = async (client) => {
 
     arrayOfSlashCommands.push(file);
   });
+
   client.on("ready", async () => {
     // Register for a guild only
     const guild = client.guilds.cache.get(client.config.guildid);
@@ -51,44 +52,6 @@ module.exports = async (client) => {
       return console.log(
         "Unable to register guild commands. No guild id given."
       );
-    await guild.commands.set(arrayOfSlashCommands).then((cmd) => {
-      const getRoles = (commandNames) => {
-        const permissions = arrayOfSlashCommands.find(
-          (x) => x.name === commandNames
-        ).userPermissions;
-
-        if (!permissions) return null;
-        return guild.roles.cache.filter(
-          (x) => x.permissions.has(permissions) && !x.managed
-        );
-      };
-
-      const fullPermissions = cmd.reduce((accumulator, x) => {
-        const roles = getRoles(x.name);
-        if (!roles) return accumulator;
-
-        const permissions = roles.reduce((a, v) => {
-          return [
-            ...a,
-            {
-              id: v.id,
-              type: "ROLE",
-              permission: true,
-            },
-          ];
-        }, []);
-
-        return [
-          ...accumulator,
-          {
-            id: x.id,
-            permissions,
-          },
-        ];
-      }, []);
-
-      guild.commands.permissions.set({ fullPermissions });
-    });
 
     // Register Globally
     await client.application.commands.set(arrayOfSlashCommands);
