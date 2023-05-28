@@ -3,6 +3,7 @@ const { Client, Collection } = require("discord.js");
 
 const client = new Client({
   intents: 32767,
+  restRequestTimeout: 60000, // 1 min
 });
 
 module.exports = client;

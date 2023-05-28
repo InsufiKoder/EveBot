@@ -20,11 +20,15 @@ module.exports = {
    * @param {CommandInteraction} interaction
    */
   run: async (client, interaction) => {
-    const input = interaction.options.getString("query");
-    const response = await waApi.getSimple(input);
+    try {
+      const input = interaction.options.getString("query");
+      const response = await waApi.getSimple(input);
 
-    const sfbuff = new Buffer.from(response.split(",")[1], "base64");
+      const sfbuff = new Buffer.from(response.split(",")[1], "base64");
 
-    interaction.followUp({ files: [{ attachment: sfbuff }] });
+      interaction.followUp({ files: [{ attachment: sfbuff }] });
+    } catch (error) {
+      interaction.followUp("An Error occured:" + error);
+    }
   },
 };
