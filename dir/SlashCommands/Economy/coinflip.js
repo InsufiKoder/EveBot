@@ -26,7 +26,7 @@ module.exports = {
     if (bet === "all") amountToBet = await economy.get(userID, "wallet");
 
     if (getwallet < amountToBet)
-      return message.reply("Be careful, you are betting more than you have.");
+      return interaction.followUp("Be careful, you are betting more than you have.");
 
     await economy.take(userID, amountToBet, "wallet");
 
